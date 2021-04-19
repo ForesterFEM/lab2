@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import zad15 
 # # arr = np.array([1,2,3,4,5])
 # # print (arr)
 # # A =np.array([[1,2,3],[7,8,9]])
@@ -169,80 +170,112 @@ import matplotlib.pyplot as plt
 #######################################################################################################
 
 
-#zadanie 3
-x1 = np.arange(1,6)
-x2 = np.linspace(5,1,5)
-x3 = np.zeros((2,2))
-x4 = np.ones((2,3))*2
-x5 = np.zeros(2)
-x6 = np.linspace(-90,-70,3)
-x7 = np.ones((5,1))*10
-A = np.block([ np.block([[ np.block([[x1],[x2]])],
-              [np.block( [x3,x4])],
-              [np.block([x5,x6])]]), x7])
-print(A)
+# #zadanie 3
+# x1 = np.arange(1,6)
+# x2 = np.linspace(5,1,5)
+# x3 = np.zeros((2,2))
+# x4 = np.ones((2,3))*2
+# x5 = np.zeros(2)
+# x6 = np.linspace(-90,-70,3)
+# x7 = np.ones((5,1))*10
+# A = np.block([ np.block([[ np.block([[x1],[x2]])],
+#               [np.block( [x3,x4])],
+#               [np.block([x5,x6])]]), x7])
+# print(A)
 
-#zadanie 4
-B=A[1,:]+A[3,:]
-print(B)
+# #zadanie 4
+# B=A[1,:]+A[3,:]
+# print(B)
 
-#zadanie 5
-C = np.max(A,0)
-print(C)
+# #zadanie 5
+# C = np.max(A,0)
+# print(C)
 
-#zadanie 6
-D = np.delete(B,[0,5],0) 
-print(D)
+# #zadanie 6
+# D = np.delete(B,[0,5],0) 
+# print(D)
 
-#zadanie 7
-for i in range(len(D)):
-    if D[i] == 4:
-       D[i]=0 
-print(D)
+# #zadanie 7
+# for i in range(len(D)):
+#     if D[i] == 4:
+#        D[i]=0 
+# print(D)
 
-#zadanie 8
-E= np.delete(C,[np.where(C==np.max(C)),np.where (C==np.amin(C))])
-print(E)
+# #zadanie 8
+# E= np.delete(C,[np.where(C==np.max(C)),np.where (C==np.amin(C))])
+# print(E)
             
-#zadanie 9
-test= np.where(A == np.max(A))[0]
-for test2 in np.where(A == np.min(A))[0]:
-    if test2 in test:
-        print(A[test2])
+# #zadanie 9
+# test= np.where(A == np.max(A))[0]
+# for test2 in np.where(A == np.min(A))[0]:
+#     if test2 in test:
+#         print(A[test2])
 
 
-#zadanie  10
-MT1=D*E
-print(MT1)
-MM1=D@E
-print(MM1)
-MM2=E@D
-print(MM2)
+# #zadanie  10
+# MT1=D*E
+# print(MT1)
+# MM1=D@E
+# print(MM1)
+# MM2=E@D
+# print(MM2)
 
 #zadanie 11
-def funkcja(n):
-    x=np.random.randint(10, size=(n,n))
-    return x, sum(x.diagonal())
+# def funkcja(n):
+#     x=np.random.randint(10, size=(n,n))
+#     return x, sum(x.diagonal())
 
-#zadanie 12
-def funkcja2(n):
-    np.fill_diagonal(n, 0)
-    np.fill_diagonal(np.fliplr(n),0)
-    return n
+# #zadanie 12
+# def funkcja2(n):
+#     np.fill_diagonal(n, 0)
+#     np.fill_diagonal(np.fliplr(n),0)
+#     return n
     
-zmienna = np.array([[1,2,3],[3,8,1],[2,3,6]])
-#zadanie 13
-def funkcja3(n):
-    a=0    
-    lwier, lkol= n.shape
-    for i in range (0,lwier):
-        print( i)
-        if (i+1)%2==0:
-            b= sum(n[i,:])
-            a=a+b
-    return a
+# #zadanie 13
+# def funkcja3(n):
+#     a=0    
+#     lwier, lkol= n.shape
+#     for i in range (0,lwier):
+#         print( i)
+#         if (i+1)%2==0:
+#             b= sum(n[i,:])
+#             a=a+b
+#     return a
 
 #zadanie 14
-np.in
-    
-    
+x = np.arange(-10,10.1,0.1)
+y1 = lambda x: np.cos(2*x) 
+# print(x)
+# plt.plot(x,y1(x),'r--', linewidth=2)
+
+# #zadanie 15
+# plt.plot(x,y1(x),'r--',x,zad15.funkcja(x),'g+', linewidth=2)
+
+# #zadanie 16
+o = np.append((lambda x: np.sin(x)) (x[np.where(x < 0)[0]]),(lambda x: np.sqrt(x)) (x[np.where(x >= 0)[0]]))
+# plt.plot(x,o)
+
+#zadanie 17
+y2 = zad15.funkcja(x)
+y3 =lambda x: 3*y1(x)+y2
+plt.plot(x,y3(x),'b*')
+
+#zadanie 18
+W=np.array([[10, 5, 1, 7],
+          [10, 9, 5, 5],    
+    [1, 6, 7, 3],
+    [10, 0, 1, 5]])
+R= [[34],
+    [44],
+    [25],
+    [27]]
+xy = np.linalg.solve(W, R)
+print(xy)
+
+#haslo to BABA 
+
+#zadanie 19
+from math import sin, pi
+from scipy.integrate import quad
+wynik, blad = quad(sin, 0, 2*pi)
+print('Wynik calkowania ', np.round(wynik,5),'\n Blad calkowania', np.round(blad,5))
