@@ -275,7 +275,14 @@ print(xy)
 #haslo to BABA 
 
 #zadanie 19
-from math import sin, pi
-from scipy.integrate import quad
-wynik, blad = quad(sin, 0, 2*pi)
-print('Wynik calkowania ', np.round(wynik,5),'\n Blad calkowania', np.round(blad,5))
+# from math import sin, pi
+# from scipy.integrate import quad
+# wynik, blad = quad(sin, 0, 2*pi)
+# print('Wynik calkowania ', np.round(wynik,5),'\n Blad calkowania', np.round(blad,5))
+
+from scipy import integrate
+x19 = np.linspace(0, 2*np.pi, 1000000)
+y19 = np.sin(x19)
+c = integrate.simps(y19, x19)
+print("Całkowanie funkcji sin(x) z użyciem miliona węzłów: ", np.round(c,5))
+
